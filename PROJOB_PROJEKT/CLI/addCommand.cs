@@ -55,7 +55,8 @@ namespace PROJOB_PROJEKT
         }
         public void Execute()
         {
-            toExe.Execute();
+            if (toExe != null) 
+                toExe.Execute();
            
         }
     }
@@ -75,7 +76,7 @@ namespace PROJOB_PROJEKT
             books = collection.Books;
             bookFactory = new Dictionary<string, IBookFactory>();
             bookFactory.Add("base", new BaseBookFactory());
-            bookFactory.Add("secondary,", new SecondaryBookFactory());
+            bookFactory.Add("secondary",new SecondaryBookFactory());
             Args = args;
             ValReader = new Dictionary<string, string>();
             BB = bookFactory[Args[2]];
@@ -361,12 +362,13 @@ namespace PROJOB_PROJEKT
             boardgamesFactory.Add("base", new baseBoardGameFactory());
             boardgamesFactory.Add("secondary", new SecondaryBoardGameFactory());
             BB = boardgamesFactory[Args[2]];
+            ValReader = new Dictionary<string, string>();
             ValReader.Add("name", "");
             ValReader.Add("minPlayers", "0");
             ValReader.Add("maxPlayers", "0");
             ValReader.Add("difficulty", "0");
            
-            ValReader = new Dictionary<string, string>();
+           
             if (Meta == null)
             {
                 Console.WriteLine("available fields:\"name\", \"minPlayers\", \"maxPlayers\", \"difficulty\"");
